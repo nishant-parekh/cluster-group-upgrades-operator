@@ -181,6 +181,9 @@ docker-build-precache: ## Build pre-cache workload container image.
 docker-push-precache: ## push pre-cache workload container image.
 	${ENGINE} push ${PRECACHE_IMG}
 
+downstream-controller-build:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build  mod=vendor -a -o manager main.go
+
 ##@ Deployment
 
 install: manifests kustomize ## Install CRDs into the K8s cluster specified in ~/.kube/config.
